@@ -17,7 +17,7 @@
     <p class="alert"><%= alert %></p>
 
     <div data-behavior='vue'>
-        <%= yield %>
+        <app-navigation></app-navigation>
         <app :message="<%= "hi".to_json %>"></app>
     </div>
 
