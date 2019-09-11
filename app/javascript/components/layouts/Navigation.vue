@@ -1,15 +1,14 @@
 <template>
-    <div>
-        Navigation
-    </div>
+  <div>
+    This is from navigation
+  </div>
 </template>
-
 <script>
-export default {
 
-}
 </script>
 
-<style>
-
+<style scoped>
+  div {
+    color: red;
+  }
 </style>

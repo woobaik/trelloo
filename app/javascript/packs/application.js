@@ -23,13 +23,22 @@
 //
 import TurbolinksAdapter from 'vue-turbolinks'
 import Vue from 'vue/dist/vue.esm'
-import App from '../app.vue'
+import { MdButton, MdContent, MdTabs } from 'vue-material/dist/components'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
 
+Vue.use(MdButton)
+Vue.use(MdContent)
+Vue.use(MdTabs)
 Vue.use(TurbolinksAdapter)
+
+import App from '../app.vue'
 
 Vue.component('app', App)
 document.addEventListener('turbolinks:load', () => {
     const app = new Vue({
         el: '[data-behavior="vue"]',
+        
     })
+    
 })

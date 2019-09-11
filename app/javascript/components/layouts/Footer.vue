@@ -1,6 +1,6 @@
 <template>
   <div>
-      Footer
+      footer
   </div>
 </template>
 
@@ -10,8 +10,6 @@ export default {
 }
 </script>
 
-<style scoped>
-    div {
-        color: red;
-    }
+<style>
+
 </style>
