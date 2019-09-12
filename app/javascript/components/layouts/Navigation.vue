@@ -1,14 +1,13 @@
 <template>
-  <div>
-    This is from navigation
+  <div class="page-container">
   </div>
 </template>
-<script>
 
-</script>
+<style lang="scss" scoped>
 
-<style scoped>
-  div {
-    color: red;
-  }
 </style>
+
+<script>
+export default {
+}
+</script>
