@@ -23,18 +23,10 @@
 //
 import TurbolinksAdapter from 'vue-turbolinks'
 import Vue from 'vue/dist/vue.esm'
-import { MdButton, MdContent, MdTabs, MdApp, MdDrawer, MdToolbar, MdList, MdListItem } from 'vue-material/dist/components'
+import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/default.css'
 
-Vue.use(MdList)
-Vue.use(MdListItem)
-Vue.use(MdApp)
-Vue.use(MdDrawer)
-Vue.use(MdToolbar)
-Vue.use(MdButton)
-Vue.use(MdContent)
-Vue.use(MdTabs)
+Vue.use(VueMaterial)
 Vue.use(TurbolinksAdapter)
 
 import App from '../app.vue'

@@ -1,5 +1,8 @@
 <template>
   <div class="page-container">
+    <md-app md-mode="reveal">
+      
+    </md-app>
   </div>
 </template>
 
