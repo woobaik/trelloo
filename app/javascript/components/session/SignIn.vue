@@ -1,6 +1,6 @@
 <template>
-  <div class="my-home">
-      HOME PAGE
+  <div class="sign-in">
+      SIGN IN PAGE
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style>
-  .my-home {
+  .sign-in {
     height: 80vh;
   }
 </style>

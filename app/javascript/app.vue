@@ -1,7 +1,9 @@
 <template>
   <div>
     <app-navigation></app-navigation>
-    <app-home></app-home>
+    <div class="main-page">
+      <router-view></router-view>
+    </div>
     <app-footer></app-footer>
   </div>
 
@@ -10,13 +12,11 @@
 
 <script>
 import Navigation from './components/layouts/Navigation.vue'
-import Home from './components/Home.vue'
 import Footer from './components/layouts/Footer.vue'
 
 export default {
   components: {
     'app-navigation': Navigation,
-    'app-home': Home,
     'app-footer': Footer
   }
 }
@@ -24,5 +24,7 @@ export default {
 </script>
 
 <style>
-  
+  .main-page {
+    background-color: lightgray;
+  }  
 </style>

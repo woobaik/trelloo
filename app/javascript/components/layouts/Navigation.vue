@@ -2,17 +2,21 @@
   <div >
       <div class="my-navigation">
           <div>
-              <img src="../../../assets/images/trello.png" alt="Trello white image" width="210" height="105">
+              <router-link :to="{name:'Home'}">
+                  <img src="../../../assets/images/trello.png" alt="Trello white image" width="210" height="70">
+              </router-link>              
           </div>
           <div>
 
           </div>
           <div class="sign-links">
               <div class="sign-link">
-                  Sign Up
+                  <router-link :to= "{name: 'SignIn'}">Sign In</router-link>
               </div>
+              
+
               <div class="sign-link">
-                  Sign In
+                  <router-link :to="{name: 'SignUp'}">Sign Up</router-link>
               </div>
           </div>
           

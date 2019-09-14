@@ -23,20 +23,22 @@
 //
 import TurbolinksAdapter from 'vue-turbolinks'
 import Vue from 'vue/dist/vue.esm'
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
+import Router from 'vue-router'
 
-Vue.use(VueMaterial)
+
+Vue.use(Router)
 Vue.use(TurbolinksAdapter)
+
 
 import App from '../app.vue'
 
 
 Vue.component('app', App)
+import router from '../router/index.js'
 document.addEventListener('turbolinks:load', () => {
     const app = new Vue({
         el: '[data-behavior="vue"]',
-        
+        router
     })
     
 })
