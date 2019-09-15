@@ -25,6 +25,6 @@ export default {
 
 <style>
   .main-page {
-    background-color: lightgray;
+    background-color: rgb(3, 148, 231);
   }  
 </style>

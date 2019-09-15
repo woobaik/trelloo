@@ -30,7 +30,7 @@
         color: white;
         justify-content: space-evenly;
         align-items: center;
-        background-color: #0079bf;
+        background-color: rgb(0, 121, 191);
         height: 10vh;
     }
 

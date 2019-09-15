@@ -1,7 +1,7 @@
 <template>
   <div>
-      <div class="add-button-area">
-        <button class="add-button">New List</button>
+      <div class="add-button-area">  
+        <button class="add-button">New Card</button>
       </div>
       <div class="my-home">
         <div class="my-card">
@@ -19,25 +19,11 @@
           </div>
           
           <div class="my-card-footer">
-            <button class="my-card-footer-delete">Delete List</button>
+            <button class="my-card-footer-delete">Delete Card</button>
           </div>
         </div>
 
-        <div class="my-card">
-
-        </div>
-
-        <div class="my-card">
-
-        </div>
-
-        <div class="my-card">
-          
-        </div>
-
-        <div class="my-card">
-          
-        </div>
+       
     </div>
   </div>
 </template>
@@ -54,6 +40,7 @@ export default {
     text-align: end;
     padding-top: 1rem;
     padding-right: 1rem;
+    background-color: beige;
   }
 
   .add-button {
@@ -66,6 +53,7 @@ export default {
     height: 3rem;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
+    margin-bottom: 10px;
   }
 
   .add-button:hover {
@@ -83,7 +71,7 @@ export default {
     }
   }
   .my-home {
-    height: 80vh;
+    height: 77vh;
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
@@ -95,7 +83,7 @@ export default {
     margin-top: 2vh;
     margin-left: 1vw;
     width: 32vw;
-    border-radius: 1vw;
+    border-radius: 5px;
     overflow-y:scroll;
     overflow: scroll;
     position: relative;
