@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'webpacker', '~> 4.0', '>= 4.0.7'
+gem 'acts_as_list'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

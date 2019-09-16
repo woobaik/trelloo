@@ -21,9 +21,7 @@
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     <% end %>
-    <p>@cards ::: </p>
-    <%= @cards.to_json %>
-    <div data-behavior='vue' data-set='<%= @cards.to_json %>'>
+    <div data-behavior='vue' data-='<%= @cards.to_json %>'>
         <app></app>
     </div>
 
