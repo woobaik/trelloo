@@ -3,13 +3,16 @@
       <div class="add-button-area">  
         <button class="add-button">New Card</button>
       </div>
-      <div class="my-home">
-        <my-card v-for="card in cards" :key="card.name" :card="card"></my-card>   
-    </div>
+      <div>
+        <draggable v-model="cards" group="ccards" class="my-home">  
+          <my-card v-for="card in cards" :key="card.name" :card="card"></my-card>   
+        </draggable>
+      </div>
   </div>
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 import Card from './layouts/Card.vue'
 
 export default {
@@ -49,7 +52,8 @@ export default {
   },
 
   components: {
-    'my-card': Card
+    'my-card': Card,
+    draggable
   }
 }
 </script>

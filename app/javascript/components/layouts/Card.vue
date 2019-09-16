@@ -3,13 +3,14 @@
         <div class="my-card-title">
             <div>{{ card.name }}</div>
             <div>
-            <i class="material-icons plus-icon">add_circle_outline</i>
+                <i class="material-icons plus-icon">add_circle_outline</i>
             </div>
         </div>
         <div class="my-card-body">
             <ul class="my-card-list">
-            <li v-for="list in card.lists" :key="list.name"> {{ list.name}}</li>
-            
+                <draggable v-model="card.lists">
+                 <li v-for="list in card.lists" :key="list.name"> {{ list.name}}</li> 
+                </draggable>
             </ul>
         </div>
         
@@ -20,8 +21,12 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 export default {
-    props: ['card']
+    props: ['card'],
+    components: {
+        draggable
+    }
 }
 </script>
 

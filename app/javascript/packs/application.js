@@ -36,9 +36,12 @@ import App from '../app.vue'
 Vue.component('app', App)
 import router from '../router/index.js'
 document.addEventListener('turbolinks:load', () => {
+    const data = document.querySelector('div[data-behavior="vue"]').dataset
+    console.log(data)
     const app = new Vue({
         el: '[data-behavior="vue"]',
-        router
+        router,
+
     })
     
 })

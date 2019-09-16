@@ -1,8 +1,13 @@
 class ApplicationController < ActionController::Base
+  before_action :set_cards
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def index
-    render inline: '', layout: 'application'
+    @cards = Card.all
+  end
+
+  def set_cards
+    @cards = Card.all
   end
   protected
 
