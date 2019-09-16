@@ -1,7 +1,7 @@
 <template>
   <div>
       <div class="add-button-area">  
-        <button class="add-button">New Card</button>
+        <button class="add-button" @click="newCardShow">New Card</button>
       </div>
       <div>
         <draggable v-model="cards" group="ccards" class="my-home">  
@@ -54,7 +54,14 @@ export default {
   components: {
     'my-card': Card,
     draggable
+  },
+
+  methods: {
+    newCardShow() {
+      this.$modal.show('newCard')
+    }
   }
+  
 }
 </script>
 

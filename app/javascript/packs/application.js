@@ -24,9 +24,10 @@
 import TurbolinksAdapter from 'vue-turbolinks'
 import Vue from 'vue/dist/vue.esm'
 import Router from 'vue-router'
-
+import VModal from 'vue-js-modal'
 
 Vue.use(Router)
+Vue.use(VModal)
 Vue.use(TurbolinksAdapter)
 
 

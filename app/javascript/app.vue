@@ -1,6 +1,7 @@
 <template>
   <div>
     <app-navigation></app-navigation>
+    <app-new-card></app-new-card>
     <div class="main-page">
       <router-view></router-view>
     </div>
@@ -13,11 +14,14 @@
 <script>
 import Navigation from './components/layouts/Navigation.vue'
 import Footer from './components/layouts/Footer.vue'
+import NewCard from './components//NewCard.vue'
 
 export default {
+
   components: {
     'app-navigation': Navigation,
-    'app-footer': Footer
+    'app-footer': Footer,
+    'app-new-card': NewCard
   }
 }
 
