@@ -5,7 +5,7 @@
       </div>
       <div>
         <draggable v-model="cards" group="ccards" class="my-home">  
-          <my-card v-for="card in cards" :key="card.name" :card="card"></my-card>   
+          <my-card v-for="(card,index) in cards" :key="card.name" :card="card" :index="index" :numberOfCards="numberOfCards"></my-card>   
         </draggable>
       </div>
   </div>
@@ -47,7 +47,14 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      
+    }
+  },
+
+  computed: {
+    numberOfCards() {
+      return this.cards.length
     }
   },
 

@@ -1,8 +1,9 @@
 <template>    
     <div class="my-card">
+      {{ numberOfCards }}
         <div class="my-card-title">
             <div>{{ card.name }}</div>
-            <div>
+            <div @click="newList">
                 <i class="material-icons plus-icon">add_circle_outline</i>
             </div>
         </div>
@@ -11,9 +12,10 @@
                 <draggable v-model="card.lists">
                  <li v-for="list in card.lists" :key="list.name"> {{ list.name}}</li> 
                 </draggable>
+                <li><input type="text"></li>
+                
             </ul>
         </div>
-        
         <div class="my-card-footer">
             <button class="my-card-footer-delete">Delete Card</button>
         </div>
@@ -23,10 +25,21 @@
 <script>
 import draggable from 'vuedraggable'
 export default {
-    props: ['card'],
+    data: function() {
+      return {
+        
+      }
+    },
+    props: ['card', 'index', 'numberOfCards'],
     components: {
         draggable
-    }
+    },
+    methods: {
+      newList() {
+        
+      }
+    },
+    
 }
 </script>
 

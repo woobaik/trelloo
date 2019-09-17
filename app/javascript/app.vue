@@ -14,7 +14,7 @@
 <script>
 import Navigation from './components/layouts/Navigation.vue'
 import Footer from './components/layouts/Footer.vue'
-import NewCard from './components//NewCard.vue'
+import NewCard from './components/home/NewCard.vue'
 
 export default {
 
