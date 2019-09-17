@@ -22,6 +22,7 @@
       <p class="alert"><%= alert %></p>
     <% end %>
     <div data-behavior='vue' data-='<%= @cards.to_json %>'>
+        <%= yield %>
         <app></app>
     </div>
 
