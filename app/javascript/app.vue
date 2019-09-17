@@ -1,9 +1,10 @@
 <template>
   <div>
+    {{ original_data }}
     <app-navigation></app-navigation>
     <app-new-card></app-new-card>
     <div class="main-page">
-      <router-view></router-view>
+      <router-view :cards="original_data"></router-view>
     </div>
     <app-footer></app-footer>
   </div>
@@ -22,7 +23,8 @@ export default {
     'app-navigation': Navigation,
     'app-footer': Footer,
     'app-new-card': NewCard
-  }
+  }, 
+  props: ['original_data']
 }
 
 </script>

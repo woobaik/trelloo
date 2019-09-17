@@ -4,7 +4,7 @@
         <button class="add-button" @click="newCardShow">New Card</button>
       </div>
       <div>
-        <draggable v-model="cards" group="ccards" class="my-home">  
+        <draggable v-model="cards" class="my-home">  
           <my-card v-for="card in cards" :key="card.name" :card="card"></my-card>   
         </draggable>
       </div>
@@ -16,46 +16,8 @@ import draggable from 'vuedraggable'
 import Card from './layouts/Card.vue'
 
 export default {
-  data: function() {
-    return {
-      cards: [
-        {
-          name: 'Todo List', 
-          lists: [
-            {
-              name: 'Install FireStickTV',
-              completed: false
-            },
-            {
-              name: 'Go get some coffee',
-              completed: true
-            },
-            {
-              name: 'Wiring Nest thermostat',
-              completed: true
-            }
-            
-          ]
-        },
 
-        {
-          name: 'In Progress',
-          lists: [
-            {
-              name: 'Finish Trello Project',
-              completed: false
-            },
-
-            {
-              name: 'Update My Linked In',
-              complted: true
-            }
-          ]
-        }
-      ],
-      
-    }
-  },
+  props: ['cards'],
 
   components: {
     'my-card': Card,
