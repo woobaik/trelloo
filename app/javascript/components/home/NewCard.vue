@@ -1,5 +1,5 @@
 <template>
-    <modal name="newCard" class="new-card-modal" width="60%" height="40%">
+    <modal name="newCard" class="new-card-modal" width="60%" height="50%">
       <div class="new-card">
         <div class="new-card-title">
           Add New Card
@@ -66,13 +66,12 @@ export default {
 
 .new-card {
   font-family: 'Saira Semi Condensed', sans-serif;
-  height: 100%;
   background-color: white;
   display:flex;
   flex-direction: column;
   align-items: center;
   padding-top: 1rem;
-  
+  height: 100%;
 }
 
 .new-card-title {
