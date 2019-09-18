@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ original_data }}
     <app-navigation></app-navigation>
     <app-new-card></app-new-card>
     <div class="main-page">

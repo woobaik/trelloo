@@ -36,12 +36,26 @@ export default {
     addNewCard() {
       if (this.newCardTitle) {
         bus.$emit('cardAdded', this.newCardTitle)
-        this.newCardTitle = ''
-        
-        this.$modal.hide('newCard')
+        const formData = new FormData()
+        formData.append('card[name]', this.newCardTitle )
+        Rails.ajax({
+          type: "POST",
+          url: "/cards",
+          data: formData,
+          dataType: 'json',
+          contentType: "application/json",
+          success: (response) => {
+            this.newCardTitle = ''
+            this.$modal.hide('newCard')
+          },
+          error: function(response) {
+            console.log('There was something wrong with your entry or our server, Please Try it later')
+            console.log(this)
+            console.log(formData)
+          }
+        })
       } else {
         this.notification = true;
-        
       }
     }
   }
