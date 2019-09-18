@@ -52,9 +52,12 @@ document.addEventListener('turbolinks:load', () => {
         },
         template: `<app :original_data="this.data"></app>`,
         created() {
-            bus.$once('cardAdded', (payload) => {
+            bus.$on('cardAdded', (payload) => {
               this.data.push({name: payload})
             })
+        },
+        beforeDestroy() {
+            bus.$off('cardAdded', payload)
         }
     })
     
