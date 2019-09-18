@@ -1,26 +1,50 @@
 <template>
-    <modal name="newCard" class="new-card-modal" width="60%" height="35%">
-        <div class="new-card"> 
-            <div class="new-card-title">
-            Add New Card
-            </div>
-            <div class="new-card-description">
-            Please Enter Card Title
-            </div>
-            <form class="new-card-form">
-            <input type="text" name="card-title" id="card-title-form" autofocus>
-            <button class="submit-btn">
-                Confirm
-            </button>
-            </form>
-            
+    <modal name="newCard" class="new-card-modal" width="60%" height="40%">
+      <div class="new-card">
+        <div class="new-card-title">
+          Add New Card
         </div>
+        <div class="new-card-description">
+          Please Enter Card Title
+        </div>
+        <form class="new-card-form" @submit.prevent="addNewCard">
+          <input type="text" name="card-title" id="card-title-form" autofocus v-model="newCardTitle">
+          <div class="notification" v-show="notification">
+            Please Add Card Title :)
+          </div>
+          <button class="submit-btn">
+            Confirm
+          </button>
+        </form>
+
+      </div>
     </modal>
 </template>
 
 <script>
-export default {
 
+import { bus } from '../../packs/application.js'
+
+export default {  
+  data: function() {
+    return {
+      newCardTitle: '',
+      notification: false
+    }
+  },
+  methods: {
+    addNewCard() {
+      if (this.newCardTitle) {
+        bus.$emit('cardAdded', this.newCardTitle)
+        this.newCardTitle = ''
+        
+        this.$modal.hide('newCard')
+      } else {
+        this.notification = true;
+        
+      }
+    }
+  }
 }
 </script>
 
@@ -77,5 +101,10 @@ export default {
     transition: all 0.3s ease-in-out;
     margin-bottom: 10px;
     cursor: pointer;
+}
+
+.notification {
+  padding-top: 1rem;
+  color: rgb(241, 180, 190);
 }
 </style>

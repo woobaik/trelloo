@@ -35,22 +35,27 @@ import App from '../app.vue'
 
 
 Vue.component('app', App)
+export const bus = new Vue();
 import router from '../router/index.js'
 document.addEventListener('turbolinks:load', () => {
     const data = JSON.parse(document.querySelector('div[data-behavior="vue"]').dataset.cards)
-    
     const app = new Vue({
         el: '[data-behavior="vue"]',
         router,
         data: function() {
             return {
-                data
+                data,
             }
         },
         components: {
             app: App
         },
-        template: `<app :original_data="this.data"></app>`
+        template: `<app :original_data="this.data"></app>`,
+        created() {
+            bus.$once('cardAdded', (payload) => {
+              this.data.push({name: payload})
+            })
+        }
     })
     
 })
