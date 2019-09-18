@@ -55,9 +55,16 @@ document.addEventListener('turbolinks:load', () => {
             bus.$on('cardAdded', (payload) => {
               this.data.push({name: payload})
             })
+
+            bus.$on('cardDeleted', (payload) => {
+                this.data = this.data.filter(card => {
+                    return card.id !== payload
+                })
+            })
         },
         beforeDestroy() {
             bus.$off('cardAdded', payload)
+            bus.$off('cardDeleted', payload)
         }
     })
     

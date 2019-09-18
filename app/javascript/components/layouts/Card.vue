@@ -2,7 +2,7 @@
     <div class="my-card">
         <div class="my-card-title">
             <div>{{ card.name }}</div>
-            <div @click="newList" v-show="!newInputOpen">
+            <div @click="addNewList" v-show="!newInputOpen">
                 <i class="material-icons plus-icon">add_circle_outline</i>
             </div>
         </div>
@@ -13,7 +13,7 @@
                 </draggable>
             </ul>
         </div>
-        <div class="my-card-footer">
+        <div class="my-card-footer" @click="deleteCard(card.id)">
             <button class="my-card-footer-delete">Delete Card</button>
         </div>
         
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-
+import {bus} from '../../packs/application'
 import NewList from '../home/NewList.vue'
 import draggable from 'vuedraggable'
 
@@ -35,12 +35,14 @@ export default {
     props: ['card'],
 
     methods: {
-      newList(evnet) {
-        if (!this.newInputOpen) {
-          this.newInput(event)
-          this.newInputOpen = true
-        } 
+      addNewList(event) {
+        console.log('add from card')
       },
+      
+      deleteCard(id) {
+        console.log(id, 'from card')
+        bus.$emit('cardDeleted', id)
+      }
  
     },
 
