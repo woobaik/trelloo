@@ -8,7 +8,7 @@
         </div>
         <div class="my-card-body">
             <ul class="my-card-list">
-                <draggable v-model="card.lists">
+                <draggable v-model="card.lists" group="lists">
                   <li v-for="list in card.lists" :key="list.id" class="my-card-list-item"> {{ list.name}}</li> 
                 </draggable>
                 <app-card-new-list v-show="newListOpen" @listFormClosed="listFormClosed" :card="card"></app-card-new-list>

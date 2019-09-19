@@ -4,7 +4,7 @@
         <button class="add-button" @click="newCardShow">New Card</button>
       </div>
       <div>
-        <draggable v-model="cards" class="my-home">  
+        <draggable v-model="cards" class="my-home" group="cards">  
           <my-card v-for="card in cards" :key="card.id" :card="card"></my-card>   
         </draggable>
       </div>
