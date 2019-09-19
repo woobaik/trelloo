@@ -28,9 +28,7 @@ export default {
     props: ['card'],
 
     methods: {
-        submitForm1() {
-            console.log('Submit Form body')
-        },
+        
         submitBtn() {
             if (!this.listInput) {
                 this.notification = 'Please Add List Title'
@@ -45,8 +43,9 @@ export default {
                     dataType:'json',
                     contentType: "application/json",
                     success: (response) => {
+                        this.listInput = ''
                         this.closeListForm()
-                        bus.$emit('appendNewList', this.listInput, this.card.id)
+                        bus.$emit('appendNewList', response)
                     },
                     error: function(error) {
                         console.log('Someting wrong with our end', error)
