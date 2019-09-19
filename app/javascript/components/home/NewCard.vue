@@ -35,7 +35,6 @@ export default {
   methods: {
     addNewCard() {
       if (this.newCardTitle) {
-        bus.$emit('cardAdded', this.newCardTitle)
         const formData = new FormData()
         formData.append('card[name]', this.newCardTitle )
         Rails.ajax({
@@ -45,6 +44,7 @@ export default {
           dataType: 'json',
           contentType: "application/json",
           success: (response) => {
+            bus.$emit('cardAdded', response)
             this.newCardTitle = ''
             this.$modal.hide('newCard')
           },
@@ -62,7 +62,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .new-card {
   font-family: 'Saira Semi Condensed', sans-serif;

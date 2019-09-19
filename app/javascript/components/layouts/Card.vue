@@ -9,9 +9,9 @@
         <div class="my-card-body">
             <ul class="my-card-list">
                 <draggable v-model="card.lists">
-                  <li v-for="list in card.lists" :key="list.name" class="my-card-list-item"> {{ list.name}}</li> 
+                  <li v-for="list in card.lists" :key="list.id" class="my-card-list-item"> {{ list.name}}</li> 
                 </draggable>
-                <app-card-new-list v-if="newListOpen"></app-card-new-list>
+                <app-card-new-list v-show="newListOpen" @listFormClosed="listFormClosed" :card="card"></app-card-new-list>
             </ul>
         </div>
         <div class="my-card-footer" >
@@ -53,8 +53,14 @@ export default {
             console.log('something is wrong with in our end.')
           }
         })
+      }, 
+
+      listFormClosed() {
+        this.newListOpen = false
       }
     },
+
+    
 
     components: {
       'app-card-new-list': NewList,
