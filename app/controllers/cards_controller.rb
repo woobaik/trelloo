@@ -4,7 +4,7 @@ class CardsController < ApplicationController
   # GET /cards
   # GET /cards.json
   def index
-    @cards = Card.all
+    @cards = Card.order('position asc')
   end
 
   # GET /cards/1
@@ -62,9 +62,10 @@ class CardsController < ApplicationController
   end
 
   def move 
-    respond_to do |format|
-      format.json {render :show, status: :ok, location: :card}
-    end
+    puts "************************************"
+    puts card_params[:position]
+    @card.insert_at(card_params[:position].to_i)
+    @card.save
   end
 
   private

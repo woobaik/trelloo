@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   
   
   resources :cards do
+    member do 
+      put :move
+    end
     resources :lists
   end
   root 'home#index'

@@ -5,9 +5,9 @@
       </div>
       <div>
         <draggable 
-          v-model="myCard" 
+          v-model="cards" 
           class="my-home" 
-          group="cards" 
+          group="myCard" 
          :moved="dragMoved"
           @change="dragChanged"
           >  
@@ -51,10 +51,26 @@ export default {
 
       },
 
-      dragChanged({
-        moved
-      }) {
+      dragChanged({moved}) {
+        console.log(moved.newIndex + 1)
         const formData = new FormData
+        formData.append('card[position]', moved.newIndex + 1)
+        console.log(moved.element.id)
+        console.log('new idnex', formData.get('card'))
+        Rails.ajax({
+          dataType:'json',
+          type: 'PUT',
+          data: formData,
+          url: `/cards/${moved.element.id}/move`,
+          success: response => {
+            console.log(response)
+            
+          }, 
+          error: error => {
+            console.log('fail patching')
+          }
+        })
+
       }
 
     },

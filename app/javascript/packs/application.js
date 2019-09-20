@@ -51,13 +51,9 @@ document.addEventListener('turbolinks:load', () => {
             app: App
         },
         template: `<app :original_data="this.data"></app>`,
-        created() {
-            
-
-        },
+        
         beforeDestroy() {
-            bus.$off('cardAdded', payload)
-            bus.$off('cardDeleted', payload)
+            
             bus.$off('appendNewList', payload)
         }
     })
