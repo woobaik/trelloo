@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: [:show, :edit, :update, :destroy]
+  before_action :set_card, only: [:show, :edit, :update, :destroy, :move]
 
   # GET /cards
   # GET /cards.json
@@ -58,6 +58,12 @@ class CardsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to cards_url, notice: 'Card was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def move 
+    respond_to do |format|
+      format.json {render :show, status: :ok, location: :card}
     end
   end
 

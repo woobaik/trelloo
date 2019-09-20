@@ -1,5 +1,5 @@
 <template>
-    <modal name="newCard" class="new-card-modal" width="60%" height="50%">
+    <modal ref="newCardModal" name="newCard" class="new-card-modal" width="60%" height="50%">
       <div class="new-card">
         <div class="new-card-title">
           Add New Card
@@ -58,7 +58,9 @@ export default {
         this.notification = true;
       }
     }
-  }
+  },
+
+  
 }
 </script>
 

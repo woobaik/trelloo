@@ -1,7 +1,7 @@
 <template>
     <form>
         <li class="my-card-list">
-            <input v-model="listInput" type="text" class="my-card-list-item" autofocus >
+            <input refs="inputField" v-model="listInput" type="text" class="my-card-list-item" autofocus >
         </li>
         <div class="notification" v-if="notification">
             {{ notification }}

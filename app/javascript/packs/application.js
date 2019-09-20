@@ -52,24 +52,8 @@ document.addEventListener('turbolinks:load', () => {
         },
         template: `<app :original_data="this.data"></app>`,
         created() {
-            bus.$on('cardAdded', (payload) => {
-                this.data.push(payload)
-            })
+            
 
-            bus.$on('cardDeleted', (payload) => {
-                this.data = this.data.filter(card => {
-                    return card.id !== payload
-                })
-            }),
-
-            bus.$on('appendNewList', (payload) => {
-                const cardId = payload.card_id
-                const index = this.data.findIndex(card => card.id === cardId)
-                if (!this.data[index].lists) {
-                    this.data[index].lists = []                    
-                }
-                this.data[index].lists.push(payload)                
-            })
         },
         beforeDestroy() {
             bus.$off('cardAdded', payload)

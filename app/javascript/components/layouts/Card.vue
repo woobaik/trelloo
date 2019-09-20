@@ -2,7 +2,7 @@
     <div class="my-card">
         <div class="my-card-title">
             <div>{{ card.name }}</div>
-            <div @click="addNewList" v-show="!newListOpen">
+            <div @click="addNewList" v-if="!newListOpen">
                 <i class="material-icons plus-icon">add_circle_outline</i>
             </div>
         </div>
@@ -11,11 +11,11 @@
                 <draggable v-model="card.lists" group="lists">
                   <li v-for="list in card.lists" :key="list.id" class="my-card-list-item"> {{ list.name}}</li> 
                 </draggable>
-                <app-card-new-list v-show="newListOpen" @listFormClosed="listFormClosed" :card="card"></app-card-new-list>
+                <app-card-new-list ref="newLIst" v-if="newListOpen" @listFormClosed="listFormClosed" :card="card"></app-card-new-list>
             </ul>
         </div>
         <div class="my-card-footer" >
-            <button class="my-card-footer-delete" @click="deleteCard(card.id)">Delete Card</button>
+            <button ref="btnbtn" class="my-card-footer-delete" @click="deleteCard(card.id)">Delete Card</button>
         </div>
         
     </div>
@@ -46,11 +46,10 @@ export default {
           url: `/cards/${id}`,
           dataType: 'json',
           success: function(response) {
-            bus.$emit('cardDeleted', id)
-            console.log('card is deleted')
+            bus.$emit('cardDeleted', id)            
           }, 
           error: function(response) {
-            console.log('something is wrong with in our end.')
+            console.log('something is wrong with in our end. delete card')
           }
         })
       }, 
