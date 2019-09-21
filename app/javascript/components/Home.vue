@@ -5,13 +5,13 @@
       </div>
       <div>
         <draggable 
-          v-model="cards" 
+          :list="myCards" 
           class="my-home" 
           group="myCard" 
-         :moved="dragMoved"
+         
           @change="dragChanged"
           >  
-          <my-card v-for="card in myCard" :key="card.id" :card="card"></my-card>   
+          <my-card v-for="card in orderedCards" :key="card.id" :card="card"></my-card>   
         </draggable>
       </div>
   </div>
@@ -21,11 +21,18 @@
 import { bus } from '../packs/application'
 import draggable from 'vuedraggable'
 import Card from './layouts/Card.vue'
+import _  from 'lodash'
 
 export default {
   data: function () {
       return {
-        myCard: this.cards
+        myCards: this.cards
+      }
+    },
+
+    computed: {
+      orderedCards: function() {
+        return _.orderBy(this.myCards, 'updated_at')
       }
     },
 
@@ -52,6 +59,7 @@ export default {
       },
 
       dragChanged({moved}) {
+        console.log(moved)
         console.log(moved.newIndex + 1)
         const formData = new FormData
         formData.append('card[position]', moved.newIndex + 1)
@@ -78,25 +86,26 @@ export default {
     created() {
 
       bus.$on('cardAdded', (payload) => {
-        this.myCard.push(payload)
+        this.myCards.push(payload)
       })
 
       bus.$on('cardDeleted', payload => {
 
-        this.myCard = this.myCard.filter(card => {
+        this.myCards = this.myCards.filter(card => {
           return card.id !== payload
         })
       })
 
       bus.$on('appendNewList', (payload) => {
         const cardId = payload.card_id
-        const index = this.myCard.findIndex(card => card.id === cardId)
-        if (!this.myCard[index].lists) {
-          this.myCard[index].lists = []
+        const index = this.myCards.findIndex(card => card.id === cardId)
+        if (!this.myCards[index].lists) {
+          this.myCards[index].lists = []
         }
-        this.myCard[index].lists.push(payload)
+        this.myCards[index].lists.push(payload)
       })
-    }
+    },
+
   }
 
 </script>
