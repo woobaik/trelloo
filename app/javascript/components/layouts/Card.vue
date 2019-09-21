@@ -8,7 +8,10 @@
         </div>
         <div class="my-card-body">
             <ul class="my-card-list">
-                <draggable v-model="card.lists" group="lists">
+                <draggable 
+                  v-model="card.lists" 
+                  group="lists"
+                  @change="changeList">
                   <li v-for="list in card.lists" :key="list.id" class="my-card-list-item"> {{ list.name}}</li> 
                 </draggable>
                 <app-card-new-list ref="newLIst" v-if="newListOpen" @listFormClosed="listFormClosed" :card="card"></app-card-new-list>
@@ -22,7 +25,7 @@
 </template>
 
 <script>
-import {bus} from '../../packs/application'
+import { bus } from '../../packs/application'
 import NewList from '../home/NewList.vue'
 import draggable from 'vuedraggable'
 
@@ -33,7 +36,7 @@ export default {
       }
     },
     
-    props: ['card'],
+    props: ['card','index'],
 
     methods: {
       addNewList(cardId) {
@@ -56,6 +59,40 @@ export default {
 
       listFormClosed() {
         this.newListOpen = false
+      },
+
+      changeList(event) {
+        
+        const eventType = event.added || event.moved
+        if (eventType) {
+          console.log(eventType)
+          console.log(this.card)
+          const targetElement = eventType.element
+
+          const formData = new FormData()
+          formData.append('list[card_id]', parseInt(this.card.id))
+          formData.append('list[position]', parseInt(eventType.newIndex))
+          Rails.ajax({
+            url: `/cards/${eventType.element.card_id}/lists/${eventType.element.id}/move`,
+            type: 'PATCH',
+            data: formData,  
+            success: function(response) {
+              console.log('success list move', response)
+            }, 
+            error: function(response) {
+              console.log('fail to move list', response)
+            }              
+          })
+        }
+        
+        // if (eventType){
+        //   const targetElement = eventType.element
+        //   Rails.ajax({
+        //     type: 'PATCH',
+        //     url: `/cards/:card_id/lists/:id/move`
+        //   })
+        // } 
+        
       }
     },
 

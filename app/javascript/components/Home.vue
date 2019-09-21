@@ -11,7 +11,7 @@
          
           @change="dragChanged"
           >  
-          <my-card v-for="card in orderedCards" :key="card.id" :card="card"></my-card>   
+          <my-card v-for="(card,index) in myCards" :key="card.id" :card="card" :index="index"></my-card>   
         </draggable>
       </div>
   </div>
@@ -30,11 +30,7 @@ export default {
       }
     },
 
-    computed: {
-      orderedCards: function() {
-        return _.orderBy(this.myCards, 'updated_at')
-      }
-    },
+    
 
     props: ['cards'],
 
@@ -59,23 +55,18 @@ export default {
       },
 
       dragChanged({moved}) {
-        console.log(moved)
-        console.log(moved.newIndex + 1)
         const formData = new FormData
-        formData.append('card[position]', moved.newIndex + 1)
-        console.log(moved.element.id)
-        console.log('new idnex', formData.get('card'))
+        formData.append('card[position]', moved.newIndex + 1)        
         Rails.ajax({
           dataType:'json',
           type: 'PUT',
           data: formData,
           url: `/cards/${moved.element.id}/move`,
           success: response => {
-            console.log(response)
-            
           }, 
           error: error => {
             console.log('fail patching')
+            console.table(error)
           }
         })
 

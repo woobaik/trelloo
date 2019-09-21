@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_list, only: [:show, :edit, :update, :destroy, :move]
 
   # GET /lists
   # GET /lists.json
@@ -59,6 +59,27 @@ class ListsController < ApplicationController
       format.html { redirect_to lists_url, notice: 'List was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def move
+    @list
+    puts "*********************************************"
+    puts @list.position
+    puts @list.card_id
+    puts params['list']['card_id']
+    puts params['list']['position'].is_a?(String)
+    @list.position = params['list']['position']
+    @list.card_id = params['list']['card_id']
+    
+    puts @list.card_id + 1
+    
+    puts '***********************************************'
+    if @list.save
+      respond_to do |format|
+        format.json {head :no_content}
+      end
+    end    
+    puts @list.errors.full_messages 
   end
 
   private
