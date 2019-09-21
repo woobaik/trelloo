@@ -65,13 +65,13 @@ export default {
         
         const eventType = event.added || event.moved
         if (eventType) {
-          console.log(eventType)
+          console.log(eventType.newIndex)
           console.log(this.card)
           const targetElement = eventType.element
 
           const formData = new FormData()
           formData.append('list[card_id]', parseInt(this.card.id))
-          formData.append('list[position]', parseInt(eventType.newIndex))
+          formData.append('list[position]', parseInt(eventType.newIndex) + 1)
           Rails.ajax({
             url: `/cards/${eventType.element.card_id}/lists/${eventType.element.id}/move`,
             type: 'PATCH',
