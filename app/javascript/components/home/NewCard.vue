@@ -44,6 +44,7 @@ export default {
           dataType: 'json',
           contentType: "application/json",
           success: (response) => {
+            console.log('new card is added fron NEWCARd', response)
             bus.$emit('cardAdded', response)
             this.newCardTitle = ''
             this.$modal.hide('newCard')

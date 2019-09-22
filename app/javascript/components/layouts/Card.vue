@@ -9,10 +9,10 @@
         <div class="my-card-body">
             <ul class="my-card-list">
                 <draggable 
-                  v-model="card.lists" 
+                  v-model="myList" 
                   group="lists"
                   @change="changeList">
-                  <li v-for="list in card.lists" :key="list.id" class="my-card-list-item"> {{ list.name}}</li> 
+                  <li v-for="list in myList" :key="list.id" class="my-card-list-item"> {{ list.name}}</li> 
                 </draggable>
                 <app-card-new-list ref="newLIst" v-if="newListOpen" @listFormClosed="listFormClosed" :card="card"></app-card-new-list>
             </ul>
@@ -32,7 +32,8 @@ import draggable from 'vuedraggable'
 export default {
     data: function() {
       return {
-        newListOpen: false
+        newListOpen: false,
+        myList: this.card.lists
       }
     },
     
@@ -41,6 +42,14 @@ export default {
     methods: {
       addNewList(cardId) {
         this.newListOpen = true
+        bus.$once('appendNewList', (payload) => {
+          const cardId = payload.card_id
+          if (!this.myList) {
+            this.myList= []
+          } 
+          this.myList.push(payload)
+          
+      })
       },
       
       deleteCard(id) {
@@ -62,8 +71,9 @@ export default {
       },
 
       changeList(event) {
-        
+        console.log(event)
         const eventType = event.added || event.moved
+        console.log(eventType)
         if (eventType) {
           console.log(eventType.newIndex)
           console.log(this.card)

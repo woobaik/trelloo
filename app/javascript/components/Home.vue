@@ -8,7 +8,6 @@
           :list="myCards" 
           class="my-home" 
           group="myCard" 
-         
           @change="dragChanged"
           >  
           <my-card v-for="(card,index) in myCards" :key="card.id" :card="card" :index="index"></my-card>   
@@ -78,6 +77,7 @@ export default {
 
       bus.$on('cardAdded', (payload) => {
         this.myCards.push(payload)
+        console.log(this.myCards)
       })
 
       bus.$on('cardDeleted', payload => {
@@ -87,14 +87,7 @@ export default {
         })
       })
 
-      bus.$on('appendNewList', (payload) => {
-        const cardId = payload.card_id
-        const index = this.myCards.findIndex(card => card.id === cardId)
-        if (!this.myCards[index].lists) {
-          this.myCards[index].lists = []
-        }
-        this.myCards[index].lists.push(payload)
-      })
+
     },
 
   }

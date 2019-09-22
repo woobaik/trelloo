@@ -43,6 +43,7 @@ export default {
                     dataType:'json',
                     contentType: "application/json",
                     success: (response) => {
+                        console.log('new list is added from NEWLIST',response)
                         this.listInput = ''
                         this.closeListForm()
                         bus.$emit('appendNewList', response)
