@@ -62,6 +62,7 @@ export default {
           }, 
           error: function(response) {
             console.log('something is wrong with in our end. delete card')
+            console.log(response)
           }
         })
       }, 
@@ -71,12 +72,8 @@ export default {
       },
 
       changeList(event) {
-        console.log(event)
         const eventType = event.added || event.moved
-        console.log(eventType)
-        if (eventType) {
-          console.log(eventType.newIndex)
-          console.log(this.card)
+        if (eventType) {          
           const targetElement = eventType.element
 
           const formData = new FormData()

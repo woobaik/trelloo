@@ -51,8 +51,7 @@ export default {
           },
           error: function(response) {
             console.log('There was something wrong with your entry or our server, Please Try it later')
-            console.log(this)
-            console.log(formData)
+            console.log(response)
           }
         })
       } else {

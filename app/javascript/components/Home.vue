@@ -17,80 +17,81 @@
 </template>
 
 <script>
-import { bus } from '../packs/application'
+import {
+  bus
+} from '../packs/application'
 import draggable from 'vuedraggable'
 import Card from './layouts/Card.vue'
-import _  from 'lodash'
+import _ from 'lodash'
 
 export default {
   data: function () {
-      return {
-        myCards: this.cards
-      }
-    },
-
-    
-
-    props: ['cards'],
-
-
-    components: {
-      'my-card': Card,
-      draggable
-    },
+    return {
+      myCards: this.cards
+    }
+  },
 
 
 
+  props: ['cards'],
 
-    methods: {
-      newCardShow() {
-        this.$modal.show('newCard')
-        
-      },
 
-      dragMoved(event) {
-        console.log('move', event)
+  components: {
+    'my-card': Card,
+    draggable
+  },
 
-      },
 
-      dragChanged({moved}) {
-        const formData = new FormData
-        formData.append('card[position]', moved.newIndex + 1)        
-        Rails.ajax({
-          dataType:'json',
-          type: 'PUT',
-          data: formData,
-          url: `/cards/${moved.element.id}/move`,
-          success: response => {
-          }, 
-          error: error => {
-            console.log('fail patching')
-            console.table(error)
-          }
-        })
 
-      }
+
+  methods: {
+    newCardShow() {
+      this.$modal.show('newCard')
 
     },
 
-    created() {
+    dragMoved(event) {
+      console.log('move', event)
 
-      bus.$on('cardAdded', (payload) => {
-        this.myCards.push(payload)
-        console.log(this.myCards)
+    },
+
+    dragChanged({
+      moved
+    }) {
+      const formData = new FormData
+      formData.append('card[position]', moved.newIndex + 1)
+      Rails.ajax({
+        dataType: 'json',
+        type: 'PUT',
+        data: formData,
+        url: `/cards/${moved.element.id}/move`,
+        success: response => {},
+        error: error => {
+          console.log('fail patching')
+          console.table(error)
+        }
       })
 
-      bus.$on('cardDeleted', payload => {
+    }
 
-        this.myCards = this.myCards.filter(card => {
-          return card.id !== payload
-        })
+  },
+
+  created() {
+
+    bus.$on('cardAdded', (payload) => {
+      this.myCards.push(payload)
+    })
+
+    bus.$on('cardDeleted', payload => {
+      this.myCards = this.myCards.filter(card => {
+        return card.id !== payload
       })
+    })
 
 
-    },
+  },
 
-  }
+}
 
 </script>
 

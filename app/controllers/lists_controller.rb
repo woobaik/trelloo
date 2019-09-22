@@ -63,23 +63,13 @@ class ListsController < ApplicationController
 
   def move
     @list
-    puts "*********************************************"
-    puts @list.position
-    puts @list.card_id
-    puts params['list']['card_id']
-    puts params['list']['position'].is_a?(String)
     @list.position = params['list']['position']
     @list.card_id = params['list']['card_id']
-    
-    puts @list.card_id + 1
-    
-    puts '***********************************************'
     if @list.save
       respond_to do |format|
         format.json {head :no_content}
       end
     end    
-    puts @list.errors.full_messages 
   end
 
   private
