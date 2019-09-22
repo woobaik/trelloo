@@ -3,7 +3,7 @@
         <div class="my-card-title">
             <div>{{ card.name }}</div>
             <div @click="addNewList" v-if="!newListOpen">
-                <i class="material-icons plus-icon">add_circle_outline</i>
+                <i class="material-icons plus-icon">add_circle_outline</i>                                
             </div>
         </div>
         <div class="my-card-body">
@@ -12,7 +12,14 @@
                   v-model="myList" 
                   group="lists"
                   @change="changeList">
-                  <li v-for="list in myList" :key="list.id" class="my-card-list-item"> {{ list.name}}</li> 
+                  <li v-for="list in myList" 
+                    :key="list.id" 
+                    class="my-card-list-item"> 
+                      <div>{{list.name}}</div>
+                      <div @click="removeList(list)">
+                        <i class="material-icons remove-icon">remove_circle</i>
+                      </div>
+                  </li> 
                 </draggable>
                 <app-card-new-list ref="newLIst" v-if="newListOpen" @listFormClosed="listFormClosed" :card="card"></app-card-new-list>
             </ul>
@@ -67,6 +74,26 @@ export default {
         })
       }, 
 
+      removeList(clickedList) {
+        
+        const listIndex = this.myList.findIndex(list => {
+          return list.id === clickedList.id
+        })
+
+        Rails.ajax({
+          url:`/cards/${clickedList.card_id}/lists/${clickedList.id}`,
+          type:'DELETE',
+          success: response => {
+            this.myList = this.myList.filter(list => {
+              return list.id !== this.myList[listIndex].id
+            })
+          },
+          error: function(response) {
+            console.log('THERE IS SOMETHING WRONG WITH REMOVING LIST', response)
+          }
+        })        
+      },
+
       listFormClosed() {
         this.newListOpen = false
       },
@@ -90,16 +117,7 @@ export default {
               console.log('fail to move list', response)
             }              
           })
-        }
-        
-        // if (eventType){
-        //   const targetElement = eventType.element
-        //   Rails.ajax({
-        //     type: 'PATCH',
-        //     url: `/cards/:card_id/lists/:id/move`
-        //   })
-        // } 
-        
+        }        
       }
     },
 
@@ -150,6 +168,24 @@ export default {
 
     }
 
+    .remove-icon {
+    }
+
+    .remove-icon:hover {
+      animation: rotation 0.2s linear alternate;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    @keyframes rotation {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(180deg);
+      }
+    }
+
     .my-card-list {
       list-style: none;
       padding: 0;
@@ -164,8 +200,11 @@ export default {
       color: white;
       border-radius: 0.5vw;
       width: 90%;
-      padding: 0.5rem 0;
+      padding: 0.5rem;
+      
       cursor: pointer;
+      display: flex;
+      justify-content: space-between;
     }
 
     .my-card-footer {
