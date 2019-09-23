@@ -7,7 +7,7 @@
         <draggable 
           :list="myCards" 
           class="my-home" 
-          group="myCard" 
+          group="'myCard'" 
           @change="dragChanged"
           >  
           <my-card v-for="(card,index) in myCards" :key="card.id" :card="card" :index="index"></my-card>   
@@ -31,8 +31,6 @@ export default {
     }
   },
 
-
-
   props: ['cards'],
 
 
@@ -41,23 +39,13 @@ export default {
     draggable
   },
 
-
-
-
   methods: {
     newCardShow() {
       this.$modal.show('newCard')
 
     },
 
-    dragMoved(event) {
-      console.log('move', event)
-
-    },
-
-    dragChanged({
-      moved
-    }) {
+    dragChanged({moved}) {
       const formData = new FormData
       formData.append('card[position]', moved.newIndex + 1)
       Rails.ajax({
@@ -77,9 +65,11 @@ export default {
   },
 
   created() {
-
+         
     bus.$on('cardAdded', (payload) => {
-      this.myCards.push(payload)
+      console.log(payload)
+      this.myCards = this.myCards.concat(payload)
+      console.log('Add a Card from Home',this.myCards)
     })
 
     bus.$on('cardDeleted', payload => {
@@ -88,6 +78,7 @@ export default {
       })
     })
 
+ 
 
   },
 

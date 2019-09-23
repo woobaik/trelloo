@@ -52,10 +52,6 @@ document.addEventListener('turbolinks:load', () => {
         },
         template: `<app :original_data="this.data"></app>`,
         
-        beforeDestroy() {
-            
-            bus.$off('appendNewList', payload)
-        }
     })
     
 })

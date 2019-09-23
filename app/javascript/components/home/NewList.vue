@@ -7,7 +7,7 @@
             {{ notification }}
         </div>
         <div>
-            <button class="btn" @click.prevent="submitBtn">Submit</button>
+            <button class="btn" @click.prevent="submitBtn(card)">Submit</button>
             <button class="btn close-btn" @click.prevent="closeListForm">Close</button>
         </div>
         
@@ -21,7 +21,7 @@ export default {
     data: function(){
         return {
             listInput: '',
-            notification: ''
+            notification: '',
         }
     },
     
@@ -29,11 +29,13 @@ export default {
 
     methods: {
         
-        submitBtn() {
+        submitBtn(card) {
             if (!this.listInput) {
                 this.notification = 'Please Add List Title'
+                console.log(card)
             } else {
                 const formData = new FormData()
+                
                 formData.append('list[name]', this.listInput)
                 formData.append('list[card_id]', this.card.id)
                 Rails.ajax({
@@ -44,9 +46,9 @@ export default {
                     contentType: "application/json",
                     success: (response) => {
                         console.log('new list is added from NEWLIST',response)
+                        this.$emit('appendNewList', response)
                         this.listInput = ''
-                        this.closeListForm()
-                        bus.$emit('appendNewList', response)
+                        this.closeListForm()                        
                     },
                     error: function(error) {
                         console.log('Someting wrong with our end', error)

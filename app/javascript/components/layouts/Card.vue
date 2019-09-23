@@ -10,7 +10,7 @@
             <ul class="my-card-list">
                 <draggable 
                   v-model="myList" 
-                  group="lists"
+                  :group="'myCard'"
                   @change="changeList">
                   <li v-for="list in myList" 
                     :key="list.id" 
@@ -21,7 +21,7 @@
                       </div>
                   </li> 
                 </draggable>
-                <app-card-new-list ref="newLIst" v-if="newListOpen" @listFormClosed="listFormClosed" :card="card"></app-card-new-list>
+                <app-card-new-list ref="newLIst" v-if="newListOpen" @appendNewList="appendListFromNewList" @listFormClosed="listFormClosed" :card="card"></app-card-new-list>
             </ul>
         </div>
         <div class="my-card-footer" >
@@ -40,7 +40,7 @@ export default {
     data: function() {
       return {
         newListOpen: false,
-        myList: this.card.lists
+        myList: this.card.lists,
       }
     },
     
@@ -49,14 +49,6 @@ export default {
     methods: {
       addNewList(cardId) {
         this.newListOpen = true
-        bus.$once('appendNewList', (payload) => {
-          const cardId = payload.card_id
-          if (!this.myList) {
-            this.myList= []
-          } 
-          this.myList.push(payload)
-          
-      })
       },
       
       deleteCard(id) {
@@ -75,7 +67,6 @@ export default {
       }, 
 
       removeList(clickedList) {
-        
         const listIndex = this.myList.findIndex(list => {
           return list.id === clickedList.id
         })
@@ -118,12 +109,21 @@ export default {
             }              
           })
         }        
+      },
+
+      appendListFromNewList(payload) {
+        console.log('sigh',payload)
+        console.log(this.card)
+        if (!this.myList) {
+          this.myList = []
+        }
+
+        this.myList.push(payload)
+       
       }
     },
 
-    
-
-    components: {
+    components: { 
       'app-card-new-list': NewList,
       draggable: draggable
     }
