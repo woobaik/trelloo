@@ -112,12 +112,9 @@ export default {
       },
 
       appendListFromNewList(payload) {
-        console.log('sigh',payload)
-        console.log(this.card)
         if (!this.myList) {
           this.myList = []
         }
-
         this.myList.push(payload)
        
       }
