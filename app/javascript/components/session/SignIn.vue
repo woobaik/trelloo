@@ -19,8 +19,6 @@ export default {
   }
 
   .my-card {
-    background-color: red;
-    height: 50vh;
-    width: 95vw;
+    
   }
 </style>
