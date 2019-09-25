@@ -18,7 +18,5 @@ export default {
     text-align: center;
   }
 
-  .my-card {
-    
-  }
+
 </style>
