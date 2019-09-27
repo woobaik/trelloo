@@ -1,24 +1,24 @@
-# README
+## This is a trello clone project
+* * *
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+* version
+- ruby 2.5.3
+- Vue 3.11.0
 
-* Ruby version
 
-* System dependencies
+- postgreSQL 
 
-* Configuration
 
-* Database creation
+* * *
+* Used Gem
+- acts_as_list
+- webpacker 
+- devise
 
-* Database initialization
+* Used NPM
+- vue-draggable
+- vue-sortable 
+- vue-router
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
